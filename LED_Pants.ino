@@ -19,6 +19,14 @@ struct FunctionArgs {
   int duration;
 };
 
+void colorWipe(FunctionArgs args, bool &isRunning) {
+    for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+    strip.setPixelColor(i, args.color);         //  Set pixel's color (in RAM)
+    strip.show();                          //  Update strip to match
+    delay(args.duration);                           //  Pause for a moment
+  }
+};
+
 //Manage what is happening on each beat
 struct BeatAction {
   int startBeat;
@@ -51,7 +59,10 @@ void loop() {
   static unsigned long lastBeatTime = 0;
   int beatInterval = 60000 / bpm;
   unsigned long currentTime = millis();
-  static bool isRunning[numActions] = {false};
+
+  // Define a fixed-size array for isRunning
+  const int maxActions = 10; // Set this to the maximum number of actions you expect
+  static bool isRunning[maxActions] = {false};
 
   int currentBeat = ((currentTime - lastBeatTime) / beatInterval) + 1;
 
@@ -90,13 +101,6 @@ void lightFade(uint32_t color, int time) {
     }
   }
 
-void colorWipe(uint32_t color, int wait) {
-  for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
-    strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
-    strip.show();                          //  Update strip to match
-    delay(wait);                           //  Pause for a moment
-  }
-}
 
 void colorFade(int time){
   for(int i = 0; i < 65535; i+=500){
