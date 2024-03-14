@@ -10,6 +10,28 @@
 // Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
+// Declare bpm of song
+int bpm = 120;
+
+//Declare function arguments
+struct FunctionArgs {
+  uint32_t color;
+  int duration;
+};
+
+//Manage what is happening on each beat
+struct BeatAction {
+  int startBeat;
+  int endBeat;
+  void (*action)(FunctionArgs args, bool &isRunning);
+  FunctionArgs args;
+};
+
+BeatAction actions[] = {
+  {4, 8, colorWipe, {strip.Color(255, 0, 0), 50}}  // Example: Red colorWipe on beats 4-8
+};
+int numActions = sizeof(actions)/sizeof(actions[0]);
+
 void setup() {
   // put your setup code here, to run once:
 
@@ -24,8 +46,26 @@ void loop() {
   // colorFade(100);
   // pulse(strip.Color(255,0,0), 50);
   // lightFade(strip.Color(255,255,0), 10);
-  chase(strip.Color(75, 255, 255), strip.Color(255, 120, 150), 10);
+  // chase(strip.Color(75, 255, 255), strip.Color(255, 120, 150), 10);
 
+  static unsigned long lastBeatTime = 0;
+  int beatInterval = 60000 / bpm;
+  unsigned long currentTime = millis();
+  static bool isRunning[numActions] = {false};
+
+  int currentBeat = ((currentTime - lastBeatTime) / beatInterval) + 1;
+
+  for(int i = 0; i < numActions; i++) {
+    if (currentBeat >= actions[i].startBeat && currentBeat <= actions[i].endBeat) {
+      actions[i].action(actions[i].args, isRunning[i]);
+    } else if (currentBeat > actions[i].endBeat && isRunning[i]) {
+      isRunning[i] = false;
+    }
+  }
+
+  if (currentBeat > actions[numActions - 1].endBeat) {
+    lastBeatTime = currentTime;
+  }
 
 }
 
