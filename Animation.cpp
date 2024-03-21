@@ -3,12 +3,13 @@
 #include <Adafruit_NeoPixel.h>
 
 Animation::Animation(int startBeat, int endBeat, enum effect){
-  int currentTime = mills();
+  int currentTime = millis();
   int startTime;
   int endTime;
   int duration;
 }
 
+//Create start and end values in mills();
 void Animation::setTime(){
   duration = (startBeat - endBeat) * bpm;
   startTime = mills();
@@ -36,7 +37,7 @@ void fade(uint64_t color1, uint64_t color2){
   setTime();
   while((currentTime + duration) % startTime < duration){
     int point = currentTime % startTime + t
-    long m = map(point, 0, endTime, color1, color2);
+    int m = map(point, 0, endTime, color1, color2);
     strip.fill(strip.ColorHSV(m, 255,255));
   }
 }

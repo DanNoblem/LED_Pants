@@ -2,19 +2,15 @@
 #include "Timeline.h"
 
 Timeline::Timeline(int bpm) {
-  _bpm = bpm;
-  int currentTime = mills();
+  int currentTime = millis();
   
 
 }
 
-void Timeline::addAnimation(int startBeat, int endBeat, enum animation){
-  
+void Timeline::addAnimation(int startBeat, int endBeat){ // enum animation
+
 }
 
 void Timeline::playAnimation(){
-  while (currentTime % (currentTime + animationDuration) < animationDuration) {
-	int count = currentTime % (currentTime + animationDuration)
-	int value = map(count, 0, animationDuration, animationValue1, animationValue2)
-	colorFade(count);
+  
 }
