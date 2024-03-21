@@ -7,10 +7,7 @@ Timeline::Timeline(int bpm) {
   
 
 }
-void Timeline::animationDuration(int startBeat, int endBeat){
-  int duration = (startBeat - endBeat) * _bpm;
-  return duration;
-}
+
 void Timeline::addAnimation(int startBeat, int endBeat, enum animation){
   
 }

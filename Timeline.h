@@ -6,9 +6,7 @@ class Timeline {
 		Timeline(int bpm);
     void addAnimation();
     void playAnimation();
-    enum animations{
-      BLINK, FADE, CHASE
-    }
+
 	private:
     int bpm;
     long currentTime;
