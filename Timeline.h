@@ -1,11 +1,14 @@
-#ifndef Animator_h
-#define Animator_h
+#ifndef Timeline_h
+#define Timeline_h
 #include "Arduino.h"
-class Animator {
+class Timeline {
 	public:
-		Animator(int bpm);
+		Timeline(int bpm);
     void addAnimation();
     void playAnimation();
+    enum animations{
+      BLINK, FADE, CHASE
+    }
 	private:
     int bpm;
     long currentTime;
