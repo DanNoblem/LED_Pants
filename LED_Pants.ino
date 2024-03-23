@@ -1,4 +1,6 @@
 #include <Adafruit_NeoPixel.h>
+#include "ZAnimation.h"
+#include "Timeline.h"
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1:
@@ -10,35 +12,9 @@
 // Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-// Declare bpm of song
-int bpm = 120;
+Animation blink(1,10);
 
-//Declare function arguments
-struct FunctionArgs {
-  uint32_t color;
-  int duration;
-};
 
-void colorWipe(FunctionArgs args, bool &isRunning) {
-    for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
-    strip.setPixelColor(i, args.color);         //  Set pixel's color (in RAM)
-    strip.show();                          //  Update strip to match
-    delay(args.duration);                           //  Pause for a moment
-  }
-};
-
-//Manage what is happening on each beat
-struct BeatAction {
-  int startBeat;
-  int endBeat;
-  void (*action)(FunctionArgs args, bool &isRunning);
-  FunctionArgs args;
-};
-
-BeatAction actions[] = {
-  {4, 8, colorWipe, {strip.Color(255, 0, 0), 50}}  // Example: Red colorWipe on beats 4-8
-};
-int numActions = sizeof(actions)/sizeof(actions[0]);
 
 void setup() {
   // put your setup code here, to run once:
@@ -49,34 +25,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  //colorWipe(strip.Color(255,   0,   0), 50);
-  // colorFade(100);
-  // pulse(strip.Color(255,0,0), 50);
-  // lightFade(strip.Color(255,255,0), 10);
-  // chase(strip.Color(75, 255, 255), strip.Color(255, 120, 150), 10);
-
-  static unsigned long lastBeatTime = 0;
-  int beatInterval = 60000 / bpm;
-  unsigned long currentTime = millis();
-
-  // Define a fixed-size array for isRunning
-  const int maxActions = 10; // Set this to the maximum number of actions you expect
-  static bool isRunning[maxActions] = {false};
-
-  int currentBeat = ((currentTime - lastBeatTime) / beatInterval) + 1;
-
-  for(int i = 0; i < numActions; i++) {
-    if (currentBeat >= actions[i].startBeat && currentBeat <= actions[i].endBeat) {
-      actions[i].action(actions[i].args, isRunning[i]);
-    } else if (currentBeat > actions[i].endBeat && isRunning[i]) {
-      isRunning[i] = false;
-    }
-  }
-
-  if (currentBeat > actions[numActions - 1].endBeat) {
-    lastBeatTime = currentTime;
-  }
 
 }
 
@@ -102,14 +50,6 @@ void lightFade(uint32_t color, int time) {
   }
 
 
-void colorFade(int time){
-  for(int i = 0; i < 65535; i+=500){
-    strip.fill(strip.ColorHSV(i,255,255));
-    strip.show();
-    delay(time);
-  }
-}
-
 void chase(uint32_t c, uint32_t c2, int length){
   strip.fill(c);
   int max = strip.numPixels()/4;
@@ -131,7 +71,3 @@ void chase(uint32_t c, uint32_t c2, int length){
   }
 }
 
-
-int getCellNumber(int row, int col) {
-  return row % 2 == 0 ? 8 * row + col : 8 * row + (7-col);
-}
