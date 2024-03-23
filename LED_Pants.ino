@@ -1,5 +1,4 @@
 #include <Adafruit_NeoPixel.h>
-#include "ZAnimation.h"
 #include "Timeline.h"
 
 // Which pin on the Arduino is connected to the NeoPixels?
@@ -12,7 +11,7 @@
 // Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-Animation blink(1,10);
+// Animation blink(1,10);
 
 
 
@@ -25,7 +24,7 @@ void setup() {
 }
 
 void loop() {
-
+  
 }
 
 void lightFade(uint32_t color, int time) {

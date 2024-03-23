@@ -4,7 +4,7 @@
 class Timeline {
 	public:
 		Timeline(int bpm);
-    void addAnimation(int startBeat, int endBeat);
+    void addAnimation(int startBeat, int endBeat, Adafruit_NeoPixel light); //animation type needed
     void playAnimation();
 
 	private:

@@ -2,7 +2,7 @@
 #include "ZAnimation.h"
 #include <Adafruit_NeoPixel.h>
 
-Animation::Animation(int startBeat, int endBeat) {
+Animation::AnimationAdafruit_NeoPixel light, int startBeat, int endBeat) {
     startTime = millis();
     endTime = 0;
     duration = (startBeat - endBeat) * 120;
@@ -22,7 +22,7 @@ void Animation::animationDuration(int startBeat, int endBeat, int bpm) {
 void Animation::blink(uint64_t color) {
     setTime();
     strip.fill(strip.ColorHSV(color, 255, 255));
-    if (currentTime % 2 == 0) {
+    if (millis() % 2 == 0) {
         strip.setBrightness(0);
     } else {
         strip.setBrightness(255);
