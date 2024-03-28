@@ -29,11 +29,13 @@ void Animation::blink(uint64_t color) {
     }
 }
 
-// void Animation::fade(uint64_t color1, uint64_t color2, Adafruit_NeoPixel &strip, int &currentTime) {
-//     setTime();
-//     while ((currentTime + duration) % startTime < duration) {
-//         int point = currentTime % startTime;
-//         int m = map(point, 0, endTime, color1, color2);
-//         strip.fill(strip.ColorHSV(m, 255, 255));
-//     }
-// }
+void Animation::lightFade(uint32_t color, long duration) { //duration in miliiseconds
+  long startTime = millis();
+  long currentTime = millis() % startTime;
+  while(currentTime < duration){ 
+    int currentTime = millis() - startTime;
+    strip.fill(color);
+    int l = map(currentTime, 0, duration, 0, 255);
+    strip.setBrightness(l);
+    strip.show();
+  };
