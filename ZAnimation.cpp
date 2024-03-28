@@ -65,3 +65,19 @@ void Animation::lightFade2(uint32_t color, uint32_t color2, long duration) {
     strip.show();
   };
 };
+
+void Animation::blink(uint32_t color, uint32_t color2, long duration){ //Not working yet
+  long startTime = millis();
+  long currentTime = millis() % startTime;
+
+  while(currentTime < duration){
+    int currentTIme = millis() - startTime;
+
+    if(currentTime % 20 < 10){
+      strip.fill(color);
+    } else {
+      strip.fill(color2);
+    }
+    strip.show();
+  };
+};
