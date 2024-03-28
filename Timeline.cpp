@@ -7,10 +7,6 @@ Timeline::Timeline() {
   std::map<std::string, Adafruit_NeoPixel> strips = {};
 }
 
-void addLEDAccessory(std::string name, uint8_t pin = 8, uint8_t numLEDs = 262) {
-
-}
-
 void Timeline::addLEDAccessory(std::string name, uint8_t pin, uint8_t numLEDs) {
   strips[name] = Adafruit_NeoPixel(numLEDs, pin, NEO_GRB + NEO_KHZ800);
 }
