@@ -20,22 +20,35 @@ void setup() {
 
 void loop() {
   //Section 1 pants
+  for(int i = 0; i < 4; i++){
+    fill(strip.Color(0,150,200), beat2millis(4,120)); //light blue
+    lightFade2(strip.Color(0,150,200), strip.Color(150,0,255),  beat2millis(1,120)); //fade to purple
+    fill(strip.Color(150,0,255), beat2millis(4,120)); //purple
+    lightFade2(strip.Color(150,0,200), strip.Color(0,150,255),  beat2millis(1,120)); //fade to blue
+  }
+  fill(strip.Color(0,150,255), beat2millis(18,120));
+  twinkle(strip.Color(0,150,200),strip.Color(150,0,255), beat2millis(24,120)); //TIMING FOR TWINKLE
+  fill(strip.Color(0,0,0), 16000); //blank
 
-  fill(strip.Color(0,150,200), beat2millis(4,120)); //light blue
-  lightFade2(strip.Color(0,150,200), strip.Color(150,0,255),  beat2millis(1,120)); //fade to purple
-  fill(strip.Color(150,0,255), beat2millis(4,120)); //purple
-  lightFade2(strip.Color(150,0,200), strip.Color(0,150,255),  beat2millis(1,120)); //fade to blue
-  fill(strip.Color(0,150,255), beat2millis(4,120));
-  twinkle(strip.Color(0,150,200),strip.Color(150,0,255), 5000);
+  //Section 2 pants 
+  uint32_t palette[3] = {strip.Color(120,18,0),strip.Color(150,23,21),strip.Color(21,23,101)};
+  fill(palette[0], beat2millis(4,100)); //color 1 deep orange
+  fill(palette[1], beat2millis(4,100)); //color 2 Deep pink
+  fill(palette[2], beat2millis(4,100)); //color 3 blue
+  fill(palette[1], beat2millis(4,100)); //color 2
+  breathe(strip.Color(255,0,0), beat2millis(16,100)); //DIFFERENT COLORS HERE
+  twinkle(palette[0],palette[1], beat2millis(15,100));
+  breathe(palette[0], beat2millis(15,100));
+  breathe(palette[1], beat2millis(31,100)); 
+  twinkle(palette[0],palette[1], beat2millis(31,100));
+  fill(strip.Color(0,0,0), 15000);
 
-  //Section 2 pants
-  fill(strip.Color(255,0,0), beat2millis(2,100)); //color 1 red
-  fill(strip.Color(150,50,0), beat2millis(2,100)); //color 2 orange
-  fill(strip.Color(150,100,0), beat2millis(2,100)); //color 3 yellow
-  fill(strip.Color(150,50,0), beat2millis(2,100)); //color 2
-  breathe(strip.Color(255,0,0), beat2millis(16,100));
-  breathe(strip.Color(150,50,0), beat2millis(32,100));
-  twinkle(strip.Color(150,50,0),strip.Color(255,0,0), beat2millis(32,100));
+  //Section 3 pants
+  lightFade2(strip.Color(0,0,0),strip.Color(255,0,0), 8000);
+  fill(strip.Color(255,0,0), 6000);
+  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(8,100));
+  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(8,100));
+  twinkle(strip.Color(150,50,0),strip.Color(255,0,0), beat2millis(31,100));
 
 
   //TESTING ///////////////////////
@@ -51,6 +64,7 @@ float beat2millis(float beats, float bpm){
   float duration = 0;
   bpm = 60/bpm; //seconds per beat
   duration = (beats*bpm) * 1000; //duration in milliseconds
+  Serial.println(duration);
   return duration;
 }
 
@@ -123,7 +137,7 @@ void breathe(uint32_t color, long duration){
   long startTime = millis();
   long currentTime = 0;
   int j = 254;
-  int m = 1;
+  int m = 2;
 
   uint8_t r1 = color >> 16;
   uint8_t g1 = color >> 8;
@@ -139,10 +153,10 @@ void breathe(uint32_t color, long duration){
     strip.fill(strip.Color(r,g,b));
 
 
-    if(j == 0) {
-      m = 1;
-    } if(j == 255){
-      m = -1;
+    if(j <= 0) {
+      m = 2;
+    } if(j >= 255){
+      m = -2;
     }
 
     if(currentTime % 3 == 0){
