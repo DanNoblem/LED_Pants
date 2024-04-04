@@ -20,35 +20,75 @@ void setup() {
 
 void loop() {
   //Section 1 pants
-  for(int i = 0; i < 4; i++){
-    fill(strip.Color(0,150,200), beat2millis(4,120)); //light blue
-    lightFade2(strip.Color(0,150,200), strip.Color(150,0,255),  beat2millis(1,120)); //fade to purple
-    fill(strip.Color(150,0,255), beat2millis(4,120)); //purple
-    lightFade2(strip.Color(150,0,200), strip.Color(0,150,255),  beat2millis(1,120)); //fade to blue
+  fill(strip.Color(150,0,255), beat2millis(1,92));
+  for(int i = 0; i < 2; i++){
+    chase(strip.Color(0,150,200), strip.Color(150,0,255),  beat2millis(4,92)); //fade to blue
+    fill(strip.Color(0,150,200), beat2millis(4,92)); //light blue wipe
+    chase(strip.Color(150,0,200), strip.Color(0,150,255),  beat2millis(4,92)); //fade to purple
+    fill(strip.Color(150,0,255), beat2millis(4,92)); //purple
   }
-  fill(strip.Color(0,150,255), beat2millis(18,120));
-  twinkle(strip.Color(0,150,200),strip.Color(150,0,255), beat2millis(24,120)); //TIMING FOR TWINKLE
-  fill(strip.Color(0,0,0), 16000); //blank
+  // fill(strip.Color(0,150,255), beat2millis(12,92));
+  twinkle(strip.Color(0,150,200),strip.Color(150,0,255), beat2millis(31,92)); //TIMING FOR TWINKLE
 
-  //Section 2 pants 
-  uint32_t palette[3] = {strip.Color(120,18,0),strip.Color(150,23,21),strip.Color(21,23,101)};
-  fill(palette[0], beat2millis(4,100)); //color 1 deep orange
-  fill(palette[1], beat2millis(4,100)); //color 2 Deep pink
-  fill(palette[2], beat2millis(4,100)); //color 3 blue
-  fill(palette[1], beat2millis(4,100)); //color 2
-  breathe(strip.Color(255,0,0), beat2millis(16,100)); //DIFFERENT COLORS HERE
-  twinkle(palette[0],palette[1], beat2millis(15,100));
-  breathe(palette[0], beat2millis(15,100));
-  breathe(palette[1], beat2millis(31,100)); 
-  twinkle(palette[0],palette[1], beat2millis(31,100));
-  fill(strip.Color(0,0,0), 15000);
+  // //Section 2 pants 
+  uint32_t palette1[2] = {strip.Color(120,18,0),strip.Color(23,150,21)}; //strip.Color(21,23,101)
+
+  fill(strip.Color(0,0,0), beat2millis(32,105)); //blank
+  fill(palette1[0], beat2millis(4,105)); //color 1 deep orange
+  fill(palette1[1], beat2millis(4,105)); //color 2 Deep pink
+  fill(palette1[0], beat2millis(4,105)); //color 3 blue
+  fill(palette1[1], beat2millis(4,105)); //color 2
+  breathe(strip.Color(255,0,0), beat2millis(16,105)); //DIFFERENT COLORS HERE
+  twinkle(palette1[0],palette1[1], beat2millis(16,105));
+  breathe(palette1[0], beat2millis(16,105));
+  breathe(palette1[1], beat2millis(32,105)); 
+  twinkle(palette1[0],palette1[1], beat2millis(32,105)); //Too long?
+
 
   //Section 3 pants
-  lightFade2(strip.Color(0,0,0),strip.Color(255,0,0), 8000);
-  fill(strip.Color(255,0,0), 6000);
-  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(8,100));
-  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(8,100));
-  twinkle(strip.Color(150,50,0),strip.Color(255,0,0), beat2millis(31,100));
+  fill(strip.Color(0,0,0), beat2millis(28,127)); //Make it shorter by 2 beats?
+  lightFade2(strip.Color(0,0,0),strip.Color(255,0,0), beat2millis(16,127));
+  fill(strip.Color(255,0,0), beat2millis(20,127)); //4 beats more?
+  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(8,127));
+  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(8,127));
+  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(8,127));
+  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(8,127));
+  twinkle(strip.Color(150,50,0),strip.Color(255,0,0), beat2millis(16,127));
+  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(4,127));
+  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(4,127));
+  lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(4,127));
+  lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(4,127));
+  fill(strip.Color(0,0,0), beat2millis(30,127));
+
+  //Section 4 pants
+  uint32_t palette[5] = {strip.Color(255,255,255),strip.Color(255,61,244), strip.Color(0,0,255),  strip.Color(254,10,145), strip.Color(74,225,255)}; //60,41,255
+  fill(palette[0], beat2millis(2,153));
+  fill(palette[1], beat2millis(2,153));
+  fill(palette[2], beat2millis(1,153));
+  fill(palette[3], beat2millis(1,153));
+  fill(palette[4], beat2millis(2,153));
+  for(int i = 0; i < 4; i++){
+    // fill(palette[i], beat2millis(2,153));
+    blink(palette[i], strip.Color(0,0,0),beat2millis(8,153));
+  }
+  chase(palette[4], palette[3], beat2millis(8,153));
+  chase(palette[0], palette[4], beat2millis(8,153));
+  chase(palette[1], palette[0], beat2millis(8,153));
+  chase(palette[2], palette[1], beat2millis(8,153));
+
+
+  lightFade2(palette[2], palette[3], beat2millis(8,153));
+  lightFade2(palette[3], palette[4], beat2millis(8,153));
+  lightFade2(palette[0], palette[1], beat2millis(8,153));
+  lightFade2(palette[1], palette[2], beat2millis(8,153));
+  lightFade2(palette[2], palette[3], beat2millis(8,153));
+  lightFade2(palette[3], palette[4], beat2millis(8,153));
+  lightFade2(palette[4], palette[0], beat2millis(8,153));
+  twinkle(palette[4], palette[3], beat2millis(8,153));
+  fill(palette[3], beat2millis(4,153));
+  lightFade2(palette[3], strip.Color(0,0,0), beat2millis(8,153));
+  fill(strip.Color(0,0,0), 20000);
+
 
 
   //TESTING ///////////////////////
@@ -133,11 +173,11 @@ void fill(uint32_t color, long duration){
   
 }
 
-void breathe(uint32_t color, long duration){
+void breathe(uint32_t color, long duration){ //Add bpm parameter 
   long startTime = millis();
   long currentTime = 0;
   int j = 254;
-  int m = 2;
+  int m = 20;
 
   uint8_t r1 = color >> 16;
   uint8_t g1 = color >> 8;
@@ -146,17 +186,17 @@ void breathe(uint32_t color, long duration){
   while(currentTime < duration){
     int currentTime = millis() - startTime;
 
-    int r = map(j, 0, 255, 0, r1);
-    int g = map(j, 0, 255, 0, g1);
-    int b = map(j, 0, 255, 0, b1);
+    int r = map(j, 0, 260, 0, r1);
+    int g = map(j, 0, 260, 0, g1);
+    int b = map(j, 0, 260, 0, b1);
 
     strip.fill(strip.Color(r,g,b));
 
 
     if(j <= 0) {
-      m = 2;
+      m = 10;
     } if(j >= 255){
-      m = -2;
+      m = -10;
     }
 
     if(currentTime % 3 == 0){
