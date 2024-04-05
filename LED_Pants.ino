@@ -58,7 +58,7 @@ void loop() {
   lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(4,127));
   lightFade2(strip.Color(255,0,0), strip.Color(150,70,0), beat2millis(4,127));
   lightFade2(strip.Color(150,70,0), strip.Color(255,0,0), beat2millis(4,127));
-  fill(strip.Color(0,0,0), beat2millis(30,127));
+  fill(strip.Color(0,0,0), beat2millis(32,127));
 
   //Section 4 pants
   uint32_t palette[5] = {strip.Color(255,255,255),strip.Color(255,61,244), strip.Color(0,0,255),  strip.Color(254,10,145), strip.Color(74,225,255)}; //60,41,255
@@ -176,7 +176,7 @@ void fill(uint32_t color, long duration){
 void breathe(uint32_t color, long duration){ //Add bpm parameter 
   long startTime = millis();
   long currentTime = 0;
-  int j = 254;
+  int j = 0;
   int m = 20;
 
   uint8_t r1 = color >> 16;
