@@ -4,6 +4,7 @@
 // On a Trinket or Gemma we suggest changing this to 1:
 #define LED_PIN    5
 
+
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 240
 
@@ -15,10 +16,24 @@ void setup() {
   Serial.begin(9600);
   strip.begin();
   strip.show();
-  strip.setBrightness(100);
+  strip.setBrightness(255);
+  pinMode(4, INPUT);  
+  pinMode(0, OUTPUT);
+  digitalWrite(0,LOW);
 }
 
 void loop() {
+  while(digitalRead(4) == LOW){
+    strip.show();
+    if(digitalRead(4) == HIGH){
+      break;
+    }
+    yield();
+  }
+  digitalWrite(0, HIGH);
+
+  fill(strip.Color(255,0,0), 30000);
+
   //Section 1 pants
   fill(strip.Color(150,0,255), beat2millis(1,92));
   for(int i = 0; i < 2; i++){
