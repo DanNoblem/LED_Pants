@@ -32,7 +32,7 @@ void loop() {
   }
   digitalWrite(0, HIGH);
 
-  fill(strip.Color(255,0,0), 30000);
+  //fill(strip.Color(255,0,0), 30000);
 
   //Section 1 pants
   fill(strip.Color(150,0,255), beat2millis(1,92));
@@ -48,12 +48,33 @@ void loop() {
   // //Section 2 pants 
   uint32_t palette1[2] = {strip.Color(120,18,0),strip.Color(23,150,21)}; //strip.Color(21,23,101)
 
-  fill(strip.Color(0,0,0), beat2millis(32,105)); //blank
-  fill(palette1[0], beat2millis(4,105)); //color 1 deep orange
-  fill(palette1[1], beat2millis(4,105)); //color 2 Deep pink
-  fill(palette1[0], beat2millis(4,105)); //color 3 blue
-  fill(palette1[1], beat2millis(4,105)); //color 2
-  breathe(strip.Color(255,0,0), beat2millis(16,105)); //DIFFERENT COLORS HERE
+  fill(strip.Color(0,0,0), beat2millis(31,105)); //blank MARY CHANGED
+
+  // LINE 4, 2 people
+  fill(palette1[0], beat2millis(16,105)); //color 1 deep orange
+  breathe(palette1[0], beat2millis(16,105)); //DIFFERENT COLORS HERE
+
+// LINE 3, 2 people
+  // fill(palette1[0], beat2millis(4,105)); //color 1 deep orange
+  // fill(palette1[1], beat2millis(12,105)); //color 2 Deep pink
+  // breathe(palette1[1], beat2millis(16,105)); //DIFFERENT COLORS HERE
+
+
+// LINE 2, 2 people
+  // fill(palette1[0], beat2millis(4,105)); //color 1 deep orange
+  // fill(palette1[1], beat2millis(4,105)); //color 2 Deep pink
+  // fill(palette1[0], beat2millis(8,105)); //color 3 blue
+  // breathe(palette1[0], beat2millis(16,105)); //DIFFERENT COLORS HERE
+
+// LINE 1, 1 person
+//   fill(palette1[0], beat2millis(4,105)); //color 1 deep orange
+//   fill(palette1[1], beat2millis(4,105)); //color 2 Deep pink
+//   fill(palette1[0], beat2millis(4,105)); //color 3 blue
+//   fill(palette1[1], beat2millis(4,105)); //color 2
+//  breathe(palette1[1], beat2millis(16,105)); //DIFFERENT COLORS HERE
+
+ 
+ /// ALL TOGETHER AGAIN
   twinkle(palette1[0],palette1[1], beat2millis(16,105));
   breathe(palette1[0], beat2millis(16,105));
   breathe(palette1[1], beat2millis(32,105)); 
@@ -99,8 +120,16 @@ void loop() {
   lightFade2(palette[2], palette[3], beat2millis(8,153));
   lightFade2(palette[3], palette[4], beat2millis(8,153));
   lightFade2(palette[4], palette[0], beat2millis(8,153));
-  twinkle(palette[4], palette[3], beat2millis(8,153));
-  fill(palette[3], beat2millis(4,153));
+  twinkle(palette[4], palette[3], beat2millis(7,153)); //Mary built in to assume a lag so shorten by 1 beat
+
+  // try this out 
+ fill(palette[0], beat2millis(2,153));
+  fill(palette[1], beat2millis(2,153));
+  fill(palette[2], beat2millis(1,153));
+  fill(palette[4], beat2millis(1,153));
+  fill(palette[3], beat2millis(2,153));
+
+  fill(palette[3], beat2millis(2,153));
   lightFade2(palette[3], strip.Color(0,0,0), beat2millis(8,153));
   fill(strip.Color(0,0,0), 20000);
 
